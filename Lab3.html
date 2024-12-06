@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<h1>113306048_Lab3_Number Guessing Game</h1>
+    <div id="game-result"></div>
+
+	<script>
+		const ans = Math.floor(Math.random()*98)+2;
+		let chances = 7;
+		let guess = null;
+		let lowerRange = 1;
+		let upperRange = 100;
+		let correct = false;
+
+		while(chances > 0 && ! correct){
+			guess = window.prompt("Guess a number betweeen "+lowerRange+"and "+ upperRange+"\nLeft chances: "+chances);
+
+			if(guess == null||guess==" "){
+				alert("Please enter an available number");
+				continue
+			}
+
+			if(isNaN(guess)){
+				alert("Please enter an available number");
+				continue;
+			}
+
+			guess = parseInt(guess);
+
+			if (guess < 1 || guess > 100){
+				alert("Please enter a number betweeen 1 and 100");
+				continue;
+			}
+
+			chances--;
+
+			if (guess == ans) {
+				correct = true;
+				alert("Correct!!!")
+				document.getElementById("game-result").innerHTML = '<img src= "correct.jpg" alt="corrrect"/>';
+			}else if(chances === 0){
+				alert("You DIE! The correct answer is "+ans);
+				document.getElementById("game-result").innerHTML = '<img src="wrong.jpg" alt="wrong"/>';
+			}else if (guess < ans){
+				alert("Guess a number between "+guess+" and "+ upperRange);
+				lowerRange = guess
+			}else{
+				alert("Guess a number betweeen "+lowerRange+" and "+ guess);
+				upperRange = guess;
+			}
+		}
+	</script>
+</body>
+</html>
